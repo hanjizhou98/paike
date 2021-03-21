@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.AdminMapper">
+
+    <select id="findAllAdmins" resultType="com.zj.demo.entity.Admin">
+        select * from admin
+    </select>
+
+    <select id="findAdminById" parameterType="string" resultType="com.zj.demo.entity.Admin">
+        select * from admin
+        where id=#{id}
+    </select>
+
+    <select id="findAdminByNameAndPassword" parameterType="string" resultType="com.zj.demo.entity.Admin">
+        select * from admin
+        where name=#{name} and password=#{password}
+    </select>
+
+    <select id="findAdminsByKeyword" parameterType="string" resultType="com.zj.demo.entity.Admin">
+        select * from admin
+        where name like concat('%',#{keywords},'%') or id like concat('%',#{keywords},'%')
+           or sex like concat('%',#{keywords},'%')
+    </select>
+
+    <insert id="addAdmin" parameterType="com.zj.demo.entity.Admin">
+        insert into admin
+        values(#{id},#{name},#{password},#{sex})
+    </insert>
+
+    <update id="updateAdminById" parameterType="com.zj.demo.entity.Admin">
+        update admin set
+                           name=#{name},
+                           password=#{password},
+                           sex=#{sex}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteAdminById" parameterType="string">
+        delete from admin where id=#{id}
+    </delete>
+
+</mapper>

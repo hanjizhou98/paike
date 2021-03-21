@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>paike</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<body>
+<br>
+<br><br>
+<div class="ui two column centered grid">
+	<div class="column">
+		<a class="larger ui red button" th:href="@{/major_index}">返回</a>&nbsp;
+		<br><br>
+		专业:&nbsp;<span th:text="${major.name}" style="font-weight: bolder"></span>&nbsp;课表
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>课程id</th>
+				<th>教室id</th>
+				<th>教师id</th>
+				<th>时间段</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="paike,it:${paikes}">
+				<td th:text="${paike.subjectId}"></td>
+				<td th:text="${paike.classroomId}"></td>
+				<td th:text="${paike.teacherId}"></td>
+				<td th:text="${paike.timeNum}"></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

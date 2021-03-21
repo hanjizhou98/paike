@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>major_detail</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<body>
+<br>
+<div class="ui two column centered grid">
+	<div class="column">
+		<a class="larger ui red button" th:href="@{/major_index}">返回</a>&nbsp;
+		<h3>专业信息</h3>
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>状态</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td th:text="${major.id}"></td>
+				<td th:text="${major.name}"></td>
+				<td th:text="${major.state}"></td>
+			</tr>
+			</tbody>
+		</table>
+		
+		<h3>专业学生</h3>
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>状态</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="student,it:${studentList}">
+				<td th:text="${student.id}"></td>
+				<td th:text="${student.name}"></td>
+				<td th:text="${student.sex}"></td>
+				<td th:text="${student.age}"></td>
+				<td th:text="${student.state}"></td>
+			</tr>
+			</tbody>
+		</table>
+		
+		<h3>专业课程</h3>
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>类别</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="subject,it:${subjectList}">
+				<td th:text="${subject.id}"></td>
+				<td th:text="${subject.name}"></td>
+				<td th:text="${subject.type}"></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

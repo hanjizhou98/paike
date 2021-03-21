@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>teacher_index</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<body>
+<br>
+<br><br>
+<div class="ui two column centered grid">
+	<div class="column">
+		<div class="ui action input">
+			<a class="larger ui green button" th:href="@{/index}">返回</a>&nbsp;
+			<a class="larger ui red button" th:href="@{/to_teacher_add}">添加</a>&nbsp;
+			<form class="ui form" th:method="post" th:action="@{/teacher_search}">
+				<div class="ui input focus">
+					<input type="text" name="keyword" placeholder="搜索...">
+				</div>
+				<button class="larger ui blue button">搜索</button>
+			</form>
+		</div>
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>用户名</th>
+				<th>密码</th>
+				<th>年龄</th>
+				<th>性别</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="teacher,it:${teacherList}">
+				<td th:text="${teacher.id}"></td>
+				<td th:text="${teacher.name}"></td>
+				<td th:text="${teacher.password}"></td>
+				<td th:text="${teacher.age}"></td>
+				<td th:text="${teacher.sex}"></td>
+				<td>
+					<button class="ui small button">
+						<a href="/to_teacher_update" th:href="@{/to_teacher_update(id=${teacher.id})}">更新</a>
+					</button>
+					<button class="ui small button">
+						<a href="/to_teacher_delete" style="color: red;" th:href="@{/to_teacher_delete(id=${teacher.id})}">删除</a>
+					</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

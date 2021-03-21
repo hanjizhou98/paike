@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>classroom_index</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<body>
+<br>
+<br><br>
+<div class="ui two column centered grid">
+	<div class="column">
+		<div class="ui action input">
+			<a class="larger ui green button" th:href="@{/index}">返回</a>&nbsp;
+			<a class="larger ui red button" th:href="@{/to_classroom_add}">添加</a>&nbsp;
+			<form class="ui form" th:method="post" th:action="@{/classroom_search}">
+				<div class="ui input focus">
+					<input type="text" name="keyword" placeholder="搜索...">
+				</div>
+				<button class="ui primary blue button">搜索</button>
+			</form>
+		</div>
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="classroom,it:${classroomList}">
+				<td th:text="${classroom.id}"></td>
+				<td th:text="${classroom.name}"></td>
+				<td th:text="${classroom.state}"></td>
+				<td>
+					<button class="ui small button">
+						<a href="/to_classroom_update" th:href="@{/to_classroom_update(id=${classroom.id})}">更新</a>
+					</button>
+					<button class="ui small button">
+						<a href="/to_classroom_delete" style="color: red;" th:href="@{/to_classroom_delete(id=${classroom.id})}">删除</a>
+					</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

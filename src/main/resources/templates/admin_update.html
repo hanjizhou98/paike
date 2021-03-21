@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>admin_update</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	</head>
+	<body>
+		<br>
+		<br><br>
+		<div class="ui four column centered grid">
+		  <div class="column">
+			  <form class="ui form" method="post" action="/admin_update">
+			    <div class="field">
+			      <label>用户名</label>
+			      <input type="text" name="name" th:value="${admin.name}">
+					<input type="hidden" name="id" th:value="${admin.id}">
+			    </div>
+			    <div class="field">
+			      <label>密码</label>
+			      <input type="text" name="password" th:value="${admin.password}">
+			    </div>
+				  <div class="field">
+					  <label>性别</label>
+					  <div th:if="${admin.sex eq 'M'}">
+						  <input type="radio" name="sex" value="M" checked="checked">M
+						  <input type="radio" name="sex" value="F">F
+					  </div>
+					  <div th:if="${admin.sex eq 'F'}">
+						  <input type="radio" name="sex" value="M">M
+						  <input type="radio" name="sex" value="F" checked="checked">F
+					  </div>
+				  </div>
+			    <button class="ui blue button" type="submit">提交</button>
+				  <a class="ui red button" th:href="@{/admin_index}">返回</a>
+			  </form>
+		  </div>
+		</div>
+	</body>
+</html>

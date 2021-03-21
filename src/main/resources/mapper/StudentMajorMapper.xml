@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.StudentMajorMapper">
+
+    <select id="findStudentsByMajorID" parameterType="string" resultType="string">
+        select student_id from student_major
+        where major_id=#{id}
+    </select>
+
+    <select id="findMajorIdByStudentId" parameterType="string" resultType="string">
+        select major_id from student_major
+        where student_id = #{id}
+    </select>
+
+    <update id="updateMajorOfStudent" parameterType="com.zj.demo.entity.StudentMajor">
+        update student_major
+        set major_id = #{majorID}
+        where student_id = #{studentID}
+    </update>
+
+    <insert id="addMajorToStudent" parameterType="com.zj.demo.entity.StudentMajor">
+        insert into student_major
+        values(#{id},#{studentID},#{majorID})
+    </insert>
+
+    <delete id="deleteStudentFromMajor" parameterType="string">
+        delete from student_major
+        where student_id = #{id}
+    </delete>
+
+    <delete id="deleteMajorAndStudentByMajorId" parameterType="string">
+        delete from student_major
+        where major_id = #{id}
+    </delete>
+
+
+</mapper>

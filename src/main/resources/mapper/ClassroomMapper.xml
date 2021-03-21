@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.ClassroomMapper">
+
+    <select id="findAllClassrooms" resultType="com.zj.demo.entity.Classroom">
+        select * from classroom
+    </select>
+
+    <select id="getClassroomTotalNum" resultType="int">
+        select count(*) from classroom
+    </select>
+
+    <select id="findClassroomById" parameterType="string" resultType="com.zj.demo.entity.Classroom">
+        select * from classroom
+        where id=#{id}
+    </select>
+
+    <select id="findClassroomsByKeyword" parameterType="string" resultType="com.zj.demo.entity.Classroom">
+        select * from classroom
+        where name like concat('%',#{keywords},'%') or id like concat('%',#{keywords},'%')
+           or state like concat('%',#{keywords},'%')
+    </select>
+
+    <insert id="addClassroom" parameterType="com.zj.demo.entity.Classroom">
+        insert into classroom
+        values(#{id},#{name},#{state})
+    </insert>
+
+    <update id="updateClassroomById" parameterType="com.zj.demo.entity.Classroom">
+        update classroom set
+               name=#{name},
+               state=#{state}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteClassroomById" parameterType="string">
+        delete from classroom where id=#{id}
+    </delete>
+
+</mapper>

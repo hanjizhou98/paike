@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.PaikeMapper">
+
+    <select id="findPaikesByMajorId" parameterType="string" resultType="com.zj.demo.entity.Paike">
+        select * from paike where major_id = #{id}
+    </select>
+
+    <insert id="addPaike" parameterType="com.zj.demo.entity.Paike">
+        insert into paike
+        values(#{id},#{majorId},#{subjectId},#{classroomId},#{teacherId},#{timeNum})
+    </insert>
+
+    <delete id="deletePaikesByMajorId" parameterType="string">
+        delete from paike
+        where major_id=#{id}
+    </delete>
+
+    <delete id="deletePaikesByClassroomId" parameterType="string">
+        delete from paike
+        where classroom_id=#{id}
+    </delete>
+
+    <delete id="deletePaikesBySubjectId" parameterType="string">
+        delete from paike
+        where subject_id=#{id}
+    </delete>
+
+</mapper>

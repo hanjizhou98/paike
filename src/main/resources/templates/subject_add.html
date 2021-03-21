@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>subject_add</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	</head>
+	<body>
+		<br>
+		<br><br>
+		<div class="ui four column centered grid">
+		  <div class="column">
+			  <form class="ui form" method="post" action="/subject_add">
+			    <div class="field">
+			      <label>名称</label>
+			      <input type="text" name="name" placeholder="名称">
+			    </div>
+			    <div class="field">
+			      <label>类型</label>
+			      <input type="text" name="type" placeholder="类型">
+			    </div>
+			    <button class="ui blue button" type="submit">提交</button>
+				  <a class="ui red button" th:href="@{/subject_index}">返回</a>
+			  </form>
+		  </div>
+		</div>
+		
+	</body>
+</html>

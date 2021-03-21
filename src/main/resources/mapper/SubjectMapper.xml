@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.SubjectMapper">
+
+    <select id="findAllSubjects" resultType="com.zj.demo.entity.Subject">
+        select * from subject
+    </select>
+
+    <select id="getSubjectTotalNum" resultType="int">
+        select count(*) from subject
+    </select>
+
+    <select id="findSubjectById" parameterType="string" resultType="com.zj.demo.entity.Subject">
+        select * from subject
+        where id=#{id}
+    </select>
+
+    <select id="findSubjectsByKeyword" parameterType="string" resultType="com.zj.demo.entity.Subject">
+        select * from subject
+        where name like concat('%',#{keywords},'%') or id like concat('%',#{keywords},'%')
+           or type like concat('%',#{keywords},'%')
+    </select>
+
+    <insert id="addSubject" parameterType="com.zj.demo.entity.Subject">
+        insert into subject
+        values(#{id},#{name},#{type})
+    </insert>
+
+    <update id="updateSubjectById" parameterType="com.zj.demo.entity.Subject">
+        update subject set
+               name=#{name},
+               type=#{type}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteSubjectById" parameterType="string">
+        delete from subject where id=#{id}
+    </delete>
+
+</mapper>

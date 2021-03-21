@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.TeacherTimeMapper">
+
+    <select id="findTeacherTimesByTeacherId" parameterType="string" resultType="com.zj.demo.entity.TeacherTime">
+        select * from teacher_time where teacher_id=#{id}
+    </select>
+
+    <insert id="addTeacherTime" parameterType="com.zj.demo.entity.TeacherTime">
+        insert into teacher_time
+        values(#{id},#{teacherId},#{timeNum},#{state})
+    </insert>
+
+    <update id="updateTeacherStateByIdAndTimeNum" parameterType="string">
+        update teacher_time
+        set state = #{state}
+        where teacher_id = #{id} and time_num = #{timeNum}
+    </update>
+
+</mapper>

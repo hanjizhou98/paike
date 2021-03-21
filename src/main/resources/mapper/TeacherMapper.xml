@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.TeacherMapper">
+
+    <select id="findAllTeachers" resultType="com.zj.demo.entity.Teacher">
+        select * from teacher
+    </select>
+
+    <select id="getTeacherTotalNum" resultType="int">
+        select count(*) from teacher
+    </select>
+
+    <select id="findTeacherById" parameterType="string" resultType="com.zj.demo.entity.Teacher">
+        select * from teacher
+        where id=#{id}
+    </select>
+
+    <select id="findTeacherByNameAndPassword" parameterType="string" resultType="com.zj.demo.entity.Teacher">
+        select * from teacher
+        where name=#{name} and password=#{password}
+    </select>
+
+    <select id="findTeachersByKeyword" parameterType="string" resultType="com.zj.demo.entity.Teacher">
+        select * from teacher
+        where name like concat('%',#{keywords},'%') or age like concat('%',#{keywords},'%') or sex like concat('%',#{keywords},'%')
+           or id like concat('%',#{keywords},'%')
+    </select>
+
+    <insert id="addTeacher" parameterType="com.zj.demo.entity.Teacher">
+        insert into teacher
+        values(#{id},#{name},#{password},#{sex},#{age})
+    </insert>
+
+    <update id="updateTeacherById" parameterType="com.zj.demo.entity.Teacher">
+        update teacher set
+        name=#{name},
+        age=#{age},
+        sex=#{sex},
+        password=#{password}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteTeacherById" parameterType="string">
+        delete from teacher where id=#{id}
+    </delete>
+
+</mapper>

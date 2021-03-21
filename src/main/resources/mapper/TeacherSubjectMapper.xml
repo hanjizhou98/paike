@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.TeacherSubjectMapper">
+
+    <select id="findTeacherSubjectByTeacherId" parameterType="string" resultType="com.zj.demo.entity.TeacherSubject">
+        select * from teacher_subject
+        where teacher_id = #{id}
+    </select>
+
+    <select id="findTeacherIdBySubjectId" parameterType="string" resultType="string">
+        select teacher_id from teacher_subject
+        where subject_id=#{id}
+    </select>
+
+    <select id="findSubjectIdByTeacherId" parameterType="string" resultType="string">
+        select subject_id from teacher_subject
+        where teacher_id=#{id}
+    </select>
+
+    <update id="updateSubjectOfTeacher" parameterType="com.zj.demo.entity.TeacherSubject">
+        update teacher_subject
+        set subject_id=#{subjectID}
+        where teacher_id=#{teacherID}
+    </update>
+
+    <insert id="addSubjectToTeacher" parameterType="com.zj.demo.entity.TeacherSubject">
+        insert into teacher_subject
+        values(#{id},#{teacherID},#{subjectID})
+    </insert>
+
+    <delete id="deleteTeacherFromSubject" parameterType="string">
+        delete from teacher_subject
+        where teacher_id = #{id}
+    </delete>
+
+    <delete id="deleteTeacherAndSubjectBySubjectId" parameterType="string">
+        delete from teacher_subject
+        where subject_id = #{id}
+    </delete>
+
+
+</mapper>

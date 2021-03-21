@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.MajorSubjectMapper">
+
+    <select id="findAllMS" resultType="com.zj.demo.entity.MajorSubject">
+        select * from major_subject
+    </select>
+
+    <select id="findSubjectsByMajorID" parameterType="string" resultType="string">
+        select subject_id from major_subject
+        where major_id=#{id}
+    </select>
+
+    <insert id="addSubjectsToMajor" parameterType="com.zj.demo.entity.MajorSubject">
+        insert into major_subject
+        values(#{id},#{majorID},#{subjectID})
+    </insert>
+
+    <delete id="deleteMajorAndSubjectByMajorId" parameterType="string">
+        delete from major_subject
+        where major_id=#{id}
+    </delete>
+
+    <delete id="deleteSubjectFromMajor" parameterType="string">
+        delete from major_subject
+        where subject_id=#{id}
+    </delete>
+
+</mapper>

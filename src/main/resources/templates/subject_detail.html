@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>subject_detail</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<body>
+<br>
+<div class="ui two column centered grid">
+	<div class="column">
+		<a class="larger ui red button" th:href="@{/subject_index}">返回</a>&nbsp;
+		<h3>课程信息</h3>
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>类型</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td th:text="${subject.id}"></td>
+				<td th:text="${subject.name}"></td>
+				<td th:text="${subject.type}"></td>
+			</tr>
+			</tbody>
+		</table>
+		
+		<h3>授课老师</h3>
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="teacher,it:${teacherList}">
+				<td th:text="${teacher.id}"></td>
+				<td th:text="${teacher.name}"></td>
+				<td th:text="${teacher.sex}"></td>
+				<td th:text="${teacher.age}"></td>
+			</tr>
+			</tbody>
+		</table>
+		
+	</div>
+</div>
+</body>
+</html>

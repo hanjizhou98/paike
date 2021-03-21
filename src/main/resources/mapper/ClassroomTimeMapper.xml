@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.demo.mapper.ClassroomTimeMapper">
+
+    <select id="findClassroomTimesByTimeNum" parameterType="string" resultType="com.zj.demo.entity.ClassroomTime">
+        select * from classroom_time
+        where time_num = #{timeNum}
+    </select>
+
+    <insert id="addClassroomTime" parameterType="com.zj.demo.entity.ClassroomTime">
+        insert into classroom_time
+        values(#{id},#{classroomId},#{timeNum},#{state})
+    </insert>
+
+    <update id="updateClassroomStateByIdAndTimeNum" parameterType="string">
+        update classroom_time
+        set state = #{state}
+        where classroom_id=#{id} and time_num=#{timeNum}
+    </update>
+
+    <delete id="deleteClassroomTimeByClassroomId" parameterType="string">
+        delete from classroom_time
+        where classroom_id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>index</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<body>
+<br>
+<br><br>
+<div class="ui two column centered grid">
+	<div class="column">
+		<div class="ui secondary  menu">
+		  <a class="ui item active" th:href="@{/index}">
+		    主页
+		  </a>
+		  <div class="right menu">
+		    <a class="ui item active" th:href="@{/to_login}" th:if="${session.user eq null}">
+		      登录
+		    </a>
+			<a class="ui item active" th:href="@{/to_register}" th:if="${session.user eq null}">
+			  注册
+			</a>
+			<a class="ui item active" th:href="@{/profile(id=${session.user.id},type=${session.type})}" th:if="${session.user ne null}">
+				<span th:if="${session.type eq 0}" th:text="'学生 : '+${session.user.name}">
+				</span>
+				<span th:if="${session.type eq 1}" th:text="'教师 : '+${session.user.name}">
+				</span>
+				<span th:if="${session.type eq 2}" th:text="'管理员 : '+${session.user.name}">
+				</span>
+			</a>
+			<a class="ui item active" th:href="@{/logout}" th:if="${session.user ne null}">
+			  退出
+			</a>
+		  </div>
+		</div>
+		<br>
+		<div class="ui list" th:if="${session.user eq null}">
+			您还未登录，请<a class="menu-item active" th:href="@{/to_login}">登录</a>后查看信息...<br><br>
+		</div>
+		<div class="ui list" th:if="${session.type eq 0}">
+			<a class="menu-item active" th:href="@{/to_student_kebiao(id=${session.user.id})}">查看课表</a><br><br>
+		</div>
+		<div class="ui list" th:if="${session.type eq 1}">
+			<a class="menu-item active" th:href="@{/major_index}">查看课表</a><br><br>
+			<a class="menu-item" th:href="@{/subject_index}">课程申请</a><br><br>
+		</div>
+		<div class="ui list" th:if="${session.type eq 2}">
+			<a class="menu-item active" th:href="@{/major_index}">班级管理</a><br><br>
+			<a class="menu-item" th:href="@{/subject_index}">课程管理</a><br><br>
+		 	<a class="menu-item" th:href="@{/teacher_index}">教师管理</a><br><br>
+			<a class="menu-item" th:href="@{/classroom_index}">教室管理</a><br><br>
+			<a class="menu-item" th:href="@{/student_index}">学生管理</a><br><br>
+			<a class="radio-menu-item" th:href="@{/admin_index}">管理员管理</a>
+		</div>
+
+	</div>
+</div>
+</body>
+</html>

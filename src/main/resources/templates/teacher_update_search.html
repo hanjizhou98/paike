@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>teacher_update_search</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	</head>
+	<body>
+		<br>
+		<br><br>
+		<div class="ui four column centered grid">
+		  <div class="column">
+			  <form class="ui form" method="post" action="/teacher_update_search">
+			    <div class="field">
+			      <label>用户名</label>
+			      <input type="text" name="name" th:value="${teacher.name}">
+					<input type="hidden" name="id" th:value="${teacher.id}">
+					<input type="hidden" name="keyword" th:value="${keyword}">
+			    </div>
+			    <div class="field">
+			      <label>密码</label>
+			      <input type="text" name="password" th:value="${teacher.password}">
+			    </div>
+				<div class="field">
+				  <label>性别</label>
+					<div th:if="${teacher.sex eq '男'}">
+						<input type="radio" name="sex" value="男" checked="checked">男
+						<input type="radio" name="sex" value="女">女
+					</div>
+					<div th:if="${teacher.sex eq '女'}">
+						<input type="radio" name="sex" value="男">男
+						<input type="radio" name="sex" value="女" checked="checked">女
+					</div>
+				</div>
+				<div class="field">
+				  <label>年龄</label>
+				  <input type="number" name="age" th:value="${teacher.age}">
+				</div>
+			    <button class="ui button" type="submit">提交</button>
+			  </form>
+		  </div>
+		</div>
+	</body>
+</html>
