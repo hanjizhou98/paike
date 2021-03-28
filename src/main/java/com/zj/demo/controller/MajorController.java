@@ -236,9 +236,11 @@ public class MajorController {
         Major major = majorMapper.findMajorById(id);
         List<String> subjects = majorSubjectMapper.findSubjectsByMajorID(id);
         List<Subject> subjectList = new ArrayList<>();
+        int sum =0;
         for (String sid :
                 subjects) {
             subjectList.add(subjectMapper.findSubjectById(sid));
+            sum+=Integer.valueOf(subjectMapper.findSubjectById(sid).getNumOfWeek());
         }
         List<String> students = studentMajorMapper.findStudentsByMajorID(id);
         List<Student> studentList = new ArrayList<>();
@@ -247,6 +249,9 @@ public class MajorController {
             studentList.add(studentMapper.findStudentById(tid));
         }
         model.addAttribute("subjectList", subjectList);
+        model.addAttribute("numOfStu",studentList.size());
+        model.addAttribute("totalTime",sum);
+        model.addAttribute("numOfSub",subjectList.size());
         model.addAttribute("studentList", studentList);
         model.addAttribute("major", major);
         return "major_detail";
@@ -276,10 +281,12 @@ public class MajorController {
          * 进行排课
          * 注意：课程分为必修和选修课程，必修课程优先安排在白天，选修课程优先安排在晚上
          */
+        int sum =0;
         for (String sid :
                 subjects) {
             // 获取课程一周的课时量
             String num = subjectMapper.findSubjectById(sid).getNumOfWeek();
+            sum+=Integer.valueOf(num);
             // 获取课程的类别：必修，选修
             String type = subjectMapper.findSubjectById(sid).getType();
             /**
@@ -403,6 +410,8 @@ public class MajorController {
                         id, null, null, null, (i+1)+""));
             }
         }
+        // 重新查找
+        List<Paike> paikeno = paikeMapper.findPaikesByMajorId(id);
         // 分开显示
         List<Paike> one = new ArrayList<>();
         List<Paike> two = new ArrayList<>();
@@ -410,21 +419,21 @@ public class MajorController {
         List<Paike> four = new ArrayList<>();
         List<Paike> five = new ArrayList<>();
         for (int i = 0; i < 35; i++) {
-            if (i%5==0)one.add(paikes.get(i));
-            if (i%5==1)two.add(paikes.get(i));
-            if (i%5==2)three.add(paikes.get(i));
-            if (i%5==3)four.add(paikes.get(i));
-            if (i%5==4)five.add(paikes.get(i));
+            if (i%5==0)one.add(paikeno.get(i));
+            if (i%5==1)two.add(paikeno.get(i));
+            if (i%5==2)three.add(paikeno.get(i));
+            if (i%5==3)four.add(paikeno.get(i));
+            if (i%5==4)five.add(paikeno.get(i));
         }
 
         Major major = majorMapper.findMajorById(id);
         model.addAttribute("major", major);
-        model.addAttribute("paikes", paikes);
         model.addAttribute("ones",one);
         model.addAttribute("twos",two);
         model.addAttribute("threes",three);
         model.addAttribute("fours",four);
         model.addAttribute("fives",five);
+        model.addAttribute("numOfSub",sum);
         return "paike_index";
     }
 
@@ -436,26 +445,20 @@ public class MajorController {
      */
     @RequestMapping("/to_paike_info")
     public String to_paike_info(String id, Model model) {
-        System.out.println("in===");
         /**
          * 当前班级所有课程都排好后，根据班级id获取
          * 班级的全部课表信息，传递到前段展示即可
          */
         List<Paike> paikes = paikeMapper.findPaikesByMajorId(id);
-        // 按照时间先后顺序排序
-        Collections.sort(paikes, (o1, o2) -> Integer.valueOf(o1.getTimeNum()) - Integer.valueOf(o2.getTimeNum()));
-        // 填充没课的时间段
-        List<String> list = new ArrayList<>();
+        int temp =0;
         for (Paike paike :
                 paikes) {
-            list.add(paike.getTimeNum());
-        }
-        for (int i = 0; i < 35; i++) {
-            if (!list.contains(String.valueOf(i+1))){
-                paikeMapper.addPaike(new Paike(IDGenerator.getUniqueID(),
-                        id, null, null, null, (i+1)+""));
+            if (paike.getClassroomId()==null|paike.getSubjectId()==null|paike.getTeacherId()==null){
+                temp++;
             }
         }
+        // 按照时间先后顺序排序
+        Collections.sort(paikes, (o1, o2) -> Integer.valueOf(o1.getTimeNum()) - Integer.valueOf(o2.getTimeNum()));
         // 分开显示
         List<Paike> one = new ArrayList<>();
         List<Paike> two = new ArrayList<>();
@@ -469,12 +472,15 @@ public class MajorController {
             if (i%5==3)four.add(paikes.get(i));
             if (i%5==4)five.add(paikes.get(i));
         }
-        System.out.println("ones==="+one);
-        model.addAttribute("ones",one);
+        // 封装数据
         Major major = majorMapper.findMajorById(id);
         model.addAttribute("major", major);
-        model.addAttribute("paikes", paikes);
+        model.addAttribute("ones",one);
+        model.addAttribute("twos",two);
+        model.addAttribute("threes",three);
+        model.addAttribute("fours",four);
+        model.addAttribute("fives",five);
+        model.addAttribute("numOfSub",paikes.size()-temp);
         return "paike_index";
     }
-
 }

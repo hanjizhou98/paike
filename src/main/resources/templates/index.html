@@ -23,11 +23,11 @@
 			  注册
 			</a>-->
 			<a class="ui item active" th:href="@{/profile(id=${session.user.id},type=${session.type})}" th:if="${session.user ne null}">
-				<span th:if="${session.type eq 0}" th:text="'学生 : '+${session.user.name}">
+				<span th:if="${session.type eq 0}" th:text="'学生 : '+${session.user?.name}">
 				</span>
-				<span th:if="${session.type eq 1}" th:text="'教师 : '+${session.user.name}">
+				<span th:if="${session.type eq 1}" th:text="'教师 : '+${session.user?.name}">
 				</span>
-				<span th:if="${session.type eq 2}" th:text="'管理员 : '+${session.user.name}">
+				<span th:if="${session.type eq 2}" th:text="'管理员 : '+${session.user?.name}">
 				</span>
 			</a>
 			<a class="ui item active" th:href="@{/logout}" th:if="${session.user ne null}">
@@ -40,7 +40,7 @@
 			您还未登录，请<a class="menu-item active" th:href="@{/to_login}">登录</a>后查看信息...<br><br>
 		</div>
 		<div class="ui list" th:if="${session.type eq 0}">
-			<a class="menu-item active" th:href="@{/to_student_kebiao(id=${session.user.id})}">查看课表</a><br><br>
+			<a class="menu-item active" th:href="@{/to_student_kebiao(id=${session.user?.id})}">查看课表</a><br><br>
 		</div>
 		<div class="ui list" th:if="${session.type eq 1}">
 			<a class="menu-item active" th:href="@{/major_index}">查看课表</a><br><br>
@@ -52,9 +52,8 @@
 		 	<a class="menu-item" th:href="@{/teacher_index}">教师管理</a><br><br>
 			<a class="menu-item" th:href="@{/classroom_index}">教室管理</a><br><br>
 			<a class="menu-item" th:href="@{/student_index}">学生管理</a><br><br>
-			<a class="radio-menu-item" th:href="@{/admin_index}">管理员管理</a>
+			<a class="radio-menu-item" th:if="${session.user?.name eq 'AD0001'}" th:href="@{/admin_index}">管理员管理</a>
 		</div>
-
 	</div>
 </div>
 </body>

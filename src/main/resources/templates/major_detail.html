@@ -5,6 +5,12 @@
 	<title>major_detail</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	<style>
+		span{
+			font-size: small;
+			color: red;
+		}
+	</style>
 </head>
 <body>
 <br>
@@ -28,8 +34,30 @@
 			</tr>
 			</tbody>
 		</table>
-		
-		<h3>专业学生</h3>
+
+		<h3>课程列表</h3>
+		<h5>共<span th:text="${numOfSub}"></span>个课程 <span th:text="${totalTime}"></span>个课时</h5>
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>类别</th>
+				<th>周课时</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="subject,it:${subjectList}">
+				<td th:text="${subject.id}"></td>
+				<td th:text="${subject.name}"></td>
+				<td th:text="${subject.type}"></td>
+				<td th:text="${subject.numOfWeek}"></td>
+			</tr>
+			</tbody>
+		</table>
+
+		<h3>学生列表</h3>
+		<h5>共<span th:text="${numOfStu}"></span>个学生</h5>
 		<table class="ui celled table">
 			<thead>
 			<tr>
@@ -47,24 +75,6 @@
 				<td th:text="${student.sex}"></td>
 				<td th:text="${student.age}"></td>
 				<td th:text="${student.state}"></td>
-			</tr>
-			</tbody>
-		</table>
-		
-		<h3>专业课程</h3>
-		<table class="ui celled table">
-			<thead>
-			<tr>
-				<th>ID</th>
-				<th>名称</th>
-				<th>类别</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr th:each="subject,it:${subjectList}">
-				<td th:text="${subject.id}"></td>
-				<td th:text="${subject.name}"></td>
-				<td th:text="${subject.type}"></td>
 			</tr>
 			</tbody>
 		</table>

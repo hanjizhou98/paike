@@ -38,7 +38,7 @@ public class SubjectTest {
         for (int i = 0; i < 30; i++) {
             temp = new Subject("SB"+ IDGenerator.getUniqueID(),
                     "SB"+IDGenerator.getID(i+1),
-                    TYPE[new Random().nextInt(TYPE.length)],String.valueOf(new Random().nextInt(5)+1));
+                    TYPE[new Random().nextInt(TYPE.length)],String.valueOf(new Random().nextInt(4)+1));
             subjectMapper.addSubject(temp);
         }
     }

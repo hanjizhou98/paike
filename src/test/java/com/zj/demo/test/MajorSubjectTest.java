@@ -38,7 +38,6 @@ public class MajorSubjectTest {
                 majorSubjectMapper.addSubjectsToMajor(new MajorSubject("MS"+IDGenerator.getUniqueID(),
                         majors.get(i).getId(),
                         subjects.get(idx++).getId()));
-
             }
         }
     }
