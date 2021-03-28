@@ -4,6 +4,7 @@ public class Subject {
     private String id;
     private String name;
     private String type;
+    private String numOfWeek;
 
     @Override
     public String toString() {
@@ -11,6 +12,7 @@ public class Subject {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
+                ", numOfWeek='" + numOfWeek + '\'' +
                 '}';
     }
 
@@ -38,9 +40,18 @@ public class Subject {
         this.type = type;
     }
 
-    public Subject(String id, String name, String type) {
+    public String getNumOfWeek() {
+        return numOfWeek;
+    }
+
+    public void setNumOfWeek(String numOfWeek) {
+        this.numOfWeek = numOfWeek;
+    }
+
+    public Subject(String id, String name, String type, String numOfWeek) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.numOfWeek = numOfWeek;
     }
 }

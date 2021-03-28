@@ -53,8 +53,8 @@ public class StudentTest {
 
     @Test
     public void test1(){
-        Student student = null;
-        for(int i=0;i<100;i++){
+        Student student;
+        for(int i=0;i<50;i++){
             student = new Student("ST"+ IDGenerator.getUniqueID()
                     ,"ST"+IDGenerator.getID(i+1)
                     ,"1111"

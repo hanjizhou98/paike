@@ -38,7 +38,7 @@
 				  <input type="number" name="age" th:value="${teacher.age}">
 				</div>
 				  <div class="field">
-					  <label>班级</label>
+					  <label>课程</label>
 					  <div class="ui radio checkbox" th:each="subject,it:${subjects}">
 						  <input type="radio" name="subject" th:value="${subject.id}" th:unless="${subject.id eq subjectID}">
 						  <input type="radio" name="subject" th:value="${subject.id}" th:if="${subject.id eq subjectID}" checked="checked">

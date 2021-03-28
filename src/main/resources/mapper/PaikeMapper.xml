@@ -27,4 +27,9 @@
         where subject_id=#{id}
     </delete>
 
+    <select id="findTeacherIdByMajorIdAndSubjectId" parameterType="string" resultType="string">
+        select teacher_id from paike
+        where major_id = #{id} and subject_id = #{sid}
+    </select>
+
 </mapper>

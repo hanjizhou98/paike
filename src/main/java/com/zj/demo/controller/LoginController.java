@@ -6,13 +6,11 @@ import com.zj.demo.entity.Teacher;
 import com.zj.demo.mapper.AdminMapper;
 import com.zj.demo.mapper.StudentMapper;
 import com.zj.demo.mapper.TeacherMapper;
-import com.zj.demo.utils.IDGenerator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.Locale;
 
 @Controller
 public class LoginController {
@@ -24,11 +22,24 @@ public class LoginController {
     @Resource
     private TeacherMapper teacherMapper;
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping("/to_login")
     public String to_login(){
         return "login";
     }
 
+    /**
+     *
+     * @param name
+     * @param password
+     * @param model
+     * @param login_type
+     * @param session
+     * @return
+     */
     @RequestMapping("/login")
     public String login(String name, String password, Model model, Integer login_type, HttpSession session){
         System.out.println(name+" "+password+" "+login_type);
@@ -65,17 +76,24 @@ public class LoginController {
         }
     }
 
+    /**
+     *
+     * @param session
+     * @return
+     */
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();
         return "redirect:index";
     }
 
-    @RequestMapping("/to_register")
-    public String to_register(){
-        return "register";
-    }
-
+    /**
+     *
+     * @param id
+     * @param type
+     * @param model
+     * @return
+     */
     @RequestMapping("/profile")
     public String profile(String id,int type,Model model) {
         if (type==0){
@@ -91,15 +109,24 @@ public class LoginController {
         return "profile";
     }
 
-    @RequestMapping("/admin_register_add")
-    public String admin_register_add(Admin admin, HttpSession session){
-        admin.setId("AD"+ IDGenerator.getUniqueID());
-        admin.setPassword(admin.getPassword().toUpperCase(Locale.ROOT));
-        adminMapper.addAdmin(admin);
-        session.setAttribute("admin",admin);
-        return "redirect:index";
-    }
+//    @RequestMapping("/to_register")
+//    public String to_register(){
+//        return "register";
+//    }
+//
+//    @RequestMapping("/admin_register_add")
+//    public String admin_register_add(Admin admin, HttpSession session){
+//        admin.setId("AD"+ IDGenerator.getUniqueID());
+//        admin.setPassword(admin.getPassword().toUpperCase(Locale.ROOT));
+//        adminMapper.addAdmin(admin);
+//        session.setAttribute("admin",admin);
+//        return "redirect:index";
+//    }
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = {"/index","/"})
     public String index(){
         return "index";

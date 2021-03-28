@@ -21,8 +21,8 @@ public class ClassroomTest {
 
     @Test
     public void test1(){
-        Classroom temp = null;
-        for (int i = 0; i < 10; i++) {
+        Classroom temp;
+        for (int i = 0; i < 3; i++) {
             temp = new Classroom("CR"+ IDGenerator.getUniqueID(),
                     "CNO"+IDGenerator.getID(i+1)
                     ,STATE[new Random().nextInt(STATE.length)]);

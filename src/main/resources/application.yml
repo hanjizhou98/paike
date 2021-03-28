@@ -10,4 +10,4 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.wzl.books.entity
+  type-aliases-package: com.zj.demo.entity

@@ -24,7 +24,7 @@ public class ClassroomTimeTest {
         List<Classroom> classroomList = classroomMapper.findAllClassrooms();
         for (Classroom t :
                 classroomList) {
-            for (int i = 0; i < 77; i++) {
+            for (int i = 0; i < 35; i++) {
                 ClassroomTime classroomTime = new ClassroomTime(
                         "CT"+IDGenerator.getUniqueID(),
                         t.getId(),""+(i+1),"0");

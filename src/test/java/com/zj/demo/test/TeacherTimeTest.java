@@ -24,7 +24,7 @@ public class TeacherTimeTest {
         List<Teacher> teacherList = teacherMapper.findAllTeachers();
         for (Teacher t :
                 teacherList) {
-            for (int i = 0; i < 77; i++) {
+            for (int i = 0; i < 35; i++) {
                 TeacherTime teacherTime = new TeacherTime(
                         "TT"+IDGenerator.getUniqueID(),
                         t.getId(),""+(i+1),"0");

@@ -19,9 +19,9 @@
 		    <a class="ui item active" th:href="@{/to_login}" th:if="${session.user eq null}">
 		      登录
 		    </a>
-			<a class="ui item active" th:href="@{/to_register}" th:if="${session.user eq null}">
+			<!--<a class="ui item active" th:href="@{/to_register}" th:if="${session.user eq null}">
 			  注册
-			</a>
+			</a>-->
 			<a class="ui item active" th:href="@{/profile(id=${session.user.id},type=${session.type})}" th:if="${session.user ne null}">
 				<span th:if="${session.type eq 0}" th:text="'学生 : '+${session.user.name}">
 				</span>

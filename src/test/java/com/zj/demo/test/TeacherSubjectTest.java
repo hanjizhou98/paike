@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootTest
 public class TeacherSubjectTest {
@@ -28,11 +29,13 @@ public class TeacherSubjectTest {
     public void test1(){
         List<Subject> subjects = subjectMapper.findAllSubjects();
         List<Teacher> teachers = teacherMapper.findAllTeachers();
-        for (int i = 0; i < teachers.size() ; i++) {
-            TeacherSubject teacherSubject = new TeacherSubject("TS"+IDGenerator.getUniqueID(),
-                    teachers.get(i).getId(),
-                    subjects.get(i).getId());
-            teacherSubjectMapper.addSubjectToTeacher(teacherSubject);
+        for (int i = 0; i < subjects.size() ; i++) {
+            for (int j = 0; j < new Random().nextInt(3)+1; j++) {
+                TeacherSubject teacherSubject = new TeacherSubject("TS"+IDGenerator.getUniqueID(),
+                        teachers.get(new Random().nextInt(teachers.size())).getId(),
+                        subjects.get(i).getId());
+                teacherSubjectMapper.addSubjectToTeacher(teacherSubject);
+            }
         }
     }
 }

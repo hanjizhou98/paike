@@ -29,7 +29,7 @@ public class MajorTest {
 
     @Test
     public void test1() {
-        Major temp = null;
+        Major temp;
         for (int i = 0; i < 3; i++) {
             temp = new Major("MJ" + IDGenerator.getUniqueID(),
                     "MJ"+IDGenerator.getID(i+1), STATE[new Random().nextInt(STATE.length)]);

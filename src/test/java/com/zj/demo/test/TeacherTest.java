@@ -44,7 +44,7 @@ public class TeacherTest {
     @Test
     public void test1(){
         Teacher teacher = null;
-        for(int i=0;i<33;i++){
+        for(int i=0;i<15;i++){
             teacher = new Teacher("TC"+ IDGenerator.getUniqueID(),
                     "TC"+IDGenerator.getID(i+1)
                     ,"1111",

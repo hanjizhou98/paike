@@ -24,7 +24,7 @@
 
     <insert id="addSubject" parameterType="com.zj.demo.entity.Subject">
         insert into subject
-        values(#{id},#{name},#{type})
+        values(#{id},#{name},#{type},#{numOfWeek})
     </insert>
 
     <update id="updateSubjectById" parameterType="com.zj.demo.entity.Subject">

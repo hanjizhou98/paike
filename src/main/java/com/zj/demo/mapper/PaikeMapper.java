@@ -19,4 +19,7 @@ public interface PaikeMapper {
     void deletePaikesByClassroomId(String id);
 
     void deletePaikesBySubjectId(String id);
+
+    List<String> findTeacherIdByMajorIdAndSubjectId(String id, String sid);
+
 }
