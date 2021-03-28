@@ -43,8 +43,8 @@
 			<a class="menu-item active" th:href="@{/to_student_kebiao(id=${session.user?.id})}">查看课表</a><br><br>
 		</div>
 		<div class="ui list" th:if="${session.type eq 1}">
-			<a class="menu-item active" th:href="@{/major_index}">查看课表</a><br><br>
-			<a class="menu-item" th:href="@{/subject_index}">课程申请</a><br><br>
+			<a class="menu-item active" th:href="@{/to_teacher_kebiao(id=${session.user?.id})}">查看课表</a><br><br>
+			<a class="menu-item active" th:href="@{/subject_index}">课程申请</a><br><br>
 		</div>
 		<div class="ui list" th:if="${session.type eq 2}">
 			<a class="menu-item active" th:href="@{/major_index}">班级管理</a><br><br>

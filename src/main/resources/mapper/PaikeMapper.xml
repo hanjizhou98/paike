@@ -32,4 +32,8 @@
         where major_id = #{id} and subject_id = #{sid}
     </select>
 
+    <select id="findPaikesByTeacherId" parameterType="string" resultType="com.zj.demo.entity.Paike">
+        select * from paike where teacher_id = #{id}
+    </select>
+
 </mapper>

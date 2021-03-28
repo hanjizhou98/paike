@@ -264,7 +264,7 @@ public class MajorController {
      * @return
      */
     @RequestMapping("/to_paike")
-    public String to_paike(String id, Model model) {
+    public String to_paike(String id, Model model,RedirectAttributes attributes) {
         /**
          * 根据专业id找专业对应的课程
          */
@@ -410,20 +410,35 @@ public class MajorController {
                         id, null, null, null, (i+1)+""));
             }
         }
-        // 重新查找
-        List<Paike> paikeno = paikeMapper.findPaikesByMajorId(id);
-        // 分开显示
+        attributes.addFlashAttribute("id",id);
+        return "redirect:to_paike_info";
+    }
+
+    /**
+     * addList
+     * @param id
+     * @param model
+     * @param paikeno
+     */
+    private void addList(String id, Model model, List<Paike> paikeno) {
+        getList(id, model, paikeno, majorMapper);
+    }
+
+    /**
+     * getList
+     * @param id
+     * @param model
+     * @param paikeno
+     * @param majorMapper
+     */
+    static void getList(String id, Model model, List<Paike> paikeno, MajorMapper majorMapper) {
         List<Paike> one = new ArrayList<>();
         List<Paike> two = new ArrayList<>();
         List<Paike> three = new ArrayList<>();
         List<Paike> four = new ArrayList<>();
         List<Paike> five = new ArrayList<>();
         for (int i = 0; i < 35; i++) {
-            if (i%5==0)one.add(paikeno.get(i));
-            if (i%5==1)two.add(paikeno.get(i));
-            if (i%5==2)three.add(paikeno.get(i));
-            if (i%5==3)four.add(paikeno.get(i));
-            if (i%5==4)five.add(paikeno.get(i));
+            TeacherController.getList(paikeno, one, two, three, four, five, i);
         }
 
         Major major = majorMapper.findMajorById(id);
@@ -433,8 +448,6 @@ public class MajorController {
         model.addAttribute("threes",three);
         model.addAttribute("fours",four);
         model.addAttribute("fives",five);
-        model.addAttribute("numOfSub",sum);
-        return "paike_index";
     }
 
     /**
@@ -460,26 +473,7 @@ public class MajorController {
         // 按照时间先后顺序排序
         Collections.sort(paikes, (o1, o2) -> Integer.valueOf(o1.getTimeNum()) - Integer.valueOf(o2.getTimeNum()));
         // 分开显示
-        List<Paike> one = new ArrayList<>();
-        List<Paike> two = new ArrayList<>();
-        List<Paike> three = new ArrayList<>();
-        List<Paike> four = new ArrayList<>();
-        List<Paike> five = new ArrayList<>();
-        for (int i = 0; i < 35; i++) {
-            if (i%5==0)one.add(paikes.get(i));
-            if (i%5==1)two.add(paikes.get(i));
-            if (i%5==2)three.add(paikes.get(i));
-            if (i%5==3)four.add(paikes.get(i));
-            if (i%5==4)five.add(paikes.get(i));
-        }
-        // 封装数据
-        Major major = majorMapper.findMajorById(id);
-        model.addAttribute("major", major);
-        model.addAttribute("ones",one);
-        model.addAttribute("twos",two);
-        model.addAttribute("threes",three);
-        model.addAttribute("fours",four);
-        model.addAttribute("fives",five);
+        addList(id, model, paikes);
         model.addAttribute("numOfSub",paikes.size()-temp);
         return "paike_index";
     }

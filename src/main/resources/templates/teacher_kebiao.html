@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>teacher_kebiao</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	<style>
+		div{
+			color:black;
+			font-weight: bolder;
+		}
+		div.small-word{
+			font-size: smaller;
+			color:red;
+		}
+		span{
+			color:red;
+			font-size: large;
+		}
+	</style>
+</head>
+<body>
+<br>
+<br><br>
+<div class="ui two column centered grid">
+	<div class="column">
+		<a class="larger ui red button" th:href="@{/index}">返回</a>&nbsp;
+		<br><br>
+		[共:<span th:text="${numOfSub}"></span>节课]
+		<table class="ui celled table">
+			<thead>
+			<tr>
+				<th></th>
+				<th>一</th>
+				<th>二</th>
+				<th>三</th>
+				<th>四</th>
+				<th>五</th>
+				<th>六</th>
+				<th>日</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>1</td>
+				<td th:each="one,it:${ones}">
+					<div th:text="${one.subjectId}">Unknown</div>
+					<div class="small-word" th:text="${one.teacherId}"></div>
+					<div class="small-word" th:text="${one.classroomId}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td th:each="two,it:${twos}">
+					<div th:text="${two.subjectId}">Unknown</div>
+					<div class="small-word" th:text="${two.teacherId}"></div>
+					<div class="small-word" th:text="${two.classroomId}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td th:each="three,it:${threes}">
+					<div th:text="${three.subjectId}">Unknown</div>
+					<div class="small-word" th:text="${three.teacherId}"></div>
+					<div class="small-word" th:text="${three.classroomId}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td th:each="four,it:${fours}">
+					<div th:text="${four.subjectId}">Unknown</div>
+					<div class="small-word" th:text="${four.teacherId}"></div>
+					<div class="small-word" th:text="${four.classroomId}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td th:each="five,it:${fives}">
+					<div th:text="${five.subjectId}">Unknown</div>
+					<div class="small-word" th:text="${five.teacherId}"></div>
+					<div class="small-word" th:text="${five.classroomId}"></div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<br>
+		<br>
+		<br>
+	</div>
+</div>
+</body>
+</html>

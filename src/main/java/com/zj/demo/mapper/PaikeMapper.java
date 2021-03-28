@@ -22,4 +22,6 @@ public interface PaikeMapper {
 
     List<String> findTeacherIdByMajorIdAndSubjectId(String id, String sid);
 
+    List<Paike> findPaikesByTeacherId(String id);
+
 }

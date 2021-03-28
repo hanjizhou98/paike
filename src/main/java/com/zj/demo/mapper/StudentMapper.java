@@ -22,4 +22,5 @@ public interface StudentMapper {
     void updateStudentById(Student student);
     void addStudent(Student student);
 
+    void updatePasswordByStudentId(String id, String password);
 }

@@ -153,37 +153,22 @@ public class StudentController {
         // 按照时间先后顺序排序
         Collections.sort(paikes, (o1, o2) -> Integer.valueOf(o1.getTimeNum()) - Integer.valueOf(o2.getTimeNum()));
         // 分开显示
-        List<Paike> one = new ArrayList<>();
-        List<Paike> two = new ArrayList<>();
-        List<Paike> three = new ArrayList<>();
-        List<Paike> four = new ArrayList<>();
-        List<Paike> five = new ArrayList<>();
-        for (int i = 0; i < 35; i++) {
-            if (i%5==0)one.add(paikes.get(i));
-            if (i%5==1)two.add(paikes.get(i));
-            if (i%5==2)three.add(paikes.get(i));
-            if (i%5==3)four.add(paikes.get(i));
-            if (i%5==4)five.add(paikes.get(i));
-        }
-        // 封装数据
-        Major major = majorMapper.findMajorById(majorid);
-        model.addAttribute("major", major);
-        model.addAttribute("ones",one);
-        model.addAttribute("twos",two);
-        model.addAttribute("threes",three);
-        model.addAttribute("fours",four);
-        model.addAttribute("fives",five);
+        MajorController.getList(majorid, model, paikes, majorMapper);
         model.addAttribute("numOfSub",paikes.size()-temp);
         return "student_kebiao";
     }
 
-
-    @RequestMapping("/student_password_update")
-    public String student_password_update(String id,Model model){
-        System.out.println("id==="+id);
+    @RequestMapping("/to_student_password_update")
+    public String to_student_password_update(String id,Model model){
         Student student = studentMapper.findStudentById(id);
         model.addAttribute("student",student);
         return "student_password_update";
+    }
+
+    @RequestMapping("/student_password_update")
+    public String student_password_update(String id,String password){
+        studentMapper.updatePasswordByStudentId(id,password);
+        return "redirect:index";
     }
 
 }
