@@ -97,6 +97,14 @@
 						<a href="#">zj.com</a>
 					</div>
 				</div>
+				<br>
+				<br>
+
+				<div class="item">
+					<div class="content">
+						<a th:href="@{/to_teacher_password_update(id=${user.id})}">修改密码</a>
+					</div>
+				</div>
 			</div>
 
 			<div class="ui list" th:if="${session.type eq 0}">

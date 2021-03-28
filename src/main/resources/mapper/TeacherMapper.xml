@@ -41,6 +41,12 @@
         where id=#{id}
     </update>
 
+    <update id="updatePasswordByTeacherId" parameterType="string">
+        update teacher set
+            password=#{password}
+        where id=#{id}
+    </update>
+
     <delete id="deleteTeacherById" parameterType="string">
         delete from teacher where id=#{id}
     </delete>

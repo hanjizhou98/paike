@@ -264,11 +264,10 @@ public class MajorController {
      * @return
      */
     @RequestMapping("/to_paike")
-    public String to_paike(String id, Model model,RedirectAttributes attributes) {
+    public String to_paike(String id,RedirectAttributes attributes) {
         /**
          * 根据专业id找专业对应的课程
          */
-        System.out.println("major_id===" + id);
         List<String> subjects = majorSubjectMapper.findSubjectsByMajorID(id);
         /**
          * 存储当前班级所有已安排课程的时间段
@@ -309,7 +308,8 @@ public class MajorController {
                  */
                 if (i >= 1) {// 如果这门课之前排过，则找到之前的这门课老师
                     List<String> teacherId = paikeMapper.findTeacherIdByMajorIdAndSubjectId(id, sid);
-                    teachers.add(teacherId.get(0));
+                    if (teacherId.size()==0);
+                    else teachers.add(teacherId.get(0));
                 } else {// 如果第一次排这门课，则根据课程id获取所有的授课老师
                     teachers = teacherSubjectMapper.findTeacherIdBySubjectId(sid);
                 }
@@ -438,7 +438,7 @@ public class MajorController {
         List<Paike> four = new ArrayList<>();
         List<Paike> five = new ArrayList<>();
         for (int i = 0; i < 35; i++) {
-            TeacherController.getList(paikeno, one, two, three, four, five, i);
+            getLists(paikeno, one, two, three, four, five, i);
         }
 
         Major major = majorMapper.findMajorById(id);
@@ -451,13 +451,31 @@ public class MajorController {
     }
 
     /**
+     * getList
+     * @param paikeno
+     * @param one
+     * @param two
+     * @param three
+     * @param four
+     * @param five
+     * @param i
+     */
+    private static void getLists(List<Paike> paikeno, List<Paike> one, List<Paike> two, List<Paike> three, List<Paike> four, List<Paike> five, int i) {
+        if (i%5==0)one.add(paikeno.get(i));
+        if (i%5==1)two.add(paikeno.get(i));
+        if (i%5==2)three.add(paikeno.get(i));
+        if (i%5==3)four.add(paikeno.get(i));
+        if (i%5==4)five.add(paikeno.get(i));
+    }
+
+    /**
      *
      * @param id
      * @param model
      * @return
      */
     @RequestMapping("/to_paike_info")
-    public String to_paike_info(String id, Model model) {
+    public String to_paike_info(@ModelAttribute("id")String id, Model model) {
         /**
          * 当前班级所有课程都排好后，根据班级id获取
          * 班级的全部课表信息，传递到前段展示即可

@@ -23,4 +23,6 @@ public interface TeacherMapper {
     int getTeacherTotalNum();
 
     Teacher findTeacherByNameAndPassword(String name, String password);
+
+    void updatePasswordByTeacherId(String id, String password);
 }

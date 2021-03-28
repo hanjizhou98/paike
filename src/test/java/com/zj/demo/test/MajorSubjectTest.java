@@ -31,7 +31,7 @@ public class MajorSubjectTest {
         List<Major> majors = majorMapper.findAllMajors();
         int idx = 0;
         for (int i = 0; i < majors.size() ; i++) {
-            int temp = new Random().nextInt(3)+7;
+            int temp = new Random().nextInt(2)+6;
             for(int j=0;j<temp;j++){
                 if (idx>=subjects.size())break;
                 else

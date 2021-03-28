@@ -147,60 +147,23 @@ public class TeacherController {
         return "redirect:teacher_search";
     }
 
-    @RequestMapping("/to_teacher_kebiao")
-    public String to_teacher_kebiao(String id,Model model){
-        List<Paike> paikes = paikeMapper.findPaikesByTeacherId(id);
-        // 按照时间先后顺序排序
-        Collections.sort(paikes, (o1, o2) -> Integer.valueOf(o1.getTimeNum()) - Integer.valueOf(o2.getTimeNum()));
-        // 填充没课的时间段
-        List<String> list = new ArrayList<>();
-        for (Paike paike :
-                paikes) {
-            list.add(paike.getTimeNum());
-        }
-        for (int i = 0; i < 35; i++) {
-            if (!list.contains(String.valueOf(i+1))){
-                paikeMapper.addPaike(new Paike(IDGenerator.getUniqueID(),
-                        id, null, null, null, (i+1)+""));
-            }
-        }
-        // 重新查找
-        List<Paike> paikeno = paikeMapper.findPaikesByMajorId(id);
-        // 分开显示
-        List<Paike> one = new ArrayList<>();
-        List<Paike> two = new ArrayList<>();
-        List<Paike> three = new ArrayList<>();
-        List<Paike> four = new ArrayList<>();
-        List<Paike> five = new ArrayList<>();
-        for (int i = 0; i < paikeno.size(); i++) {
-            getList(paikeno, one, two, three, four, five, i);
-        }
-        // 封装数据
-        System.out.println("one==="+one);
-        model.addAttribute("ones",one);
-        model.addAttribute("twos",two);
-        model.addAttribute("threes",three);
-        model.addAttribute("fours",four);
-        model.addAttribute("fives",five);
-        model.addAttribute("numOfSub",paikes.size());
-        return "teacher_kebiao";
+    @RequestMapping("/to_teacher_password_update")
+    public String to_teacher_password_update(String id,Model model){
+        Teacher teacher = teacherMapper.findTeacherById(id);
+        model.addAttribute("teacher",teacher);
+        return "teacher_password_update";
     }
 
     /**
-     * getList
-     * @param paikes
-     * @param one
-     * @param two
-     * @param three
-     * @param four
-     * @param five
-     * @param i
+     *
+     * @param id
+     * @param password
+     * @return
      */
-    static void getList(List<Paike> paikes, List<Paike> one, List<Paike> two, List<Paike> three, List<Paike> four, List<Paike> five, int i) {
-        if (i%5==0)one.add(paikes.get(i));
-        if (i%5==1)two.add(paikes.get(i));
-        if (i%5==2)three.add(paikes.get(i));
-        if (i%5==3)four.add(paikes.get(i));
-        if (i%5==4)five.add(paikes.get(i));
+    @RequestMapping("/teacher_password_update")
+    public String teacher_password_update(String id,String password){
+        teacherMapper.updatePasswordByTeacherId(id,password);
+        return "redirect:index";
     }
+
 }
