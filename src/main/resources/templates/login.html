@@ -5,14 +5,29 @@
 		<title>login</title>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+		<style>
+			body{
+				background-color: aliceblue;
+				background-image: url("https://images.unsplash.com/photo-1508108712903-49b7ef9b1df8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80");
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			h1{
+				color:black;
+				font-weight: bolder;
+				font-family: "微软雅黑 Light";
+				text-decoration: aliceblue;
+			}
+
+		</style>
 	</head>
 	<body>
-		<br>
-		<br><br>
-		<img class="ui fluid image" th:src=@{"static/bg.png"}>
+		<br><br><br>
+		<br><br><br><br>
 		<div class="ui four column centered grid">
 		  <div class="column">
-			  <form class="ui form" method="post" action="/login">
+			  <h1>自动排课系统</h1><br>
+			  <form class="ui centered form" method="post" action="/login">
 			    <div class="field">
 			      <label>用户名</label>
 			      <input type="text" name="name" required="required" placeholder="用户名">

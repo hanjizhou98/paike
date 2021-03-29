@@ -5,6 +5,14 @@
 	<title>index</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	<style>
+		body{
+			background-color: aliceblue;
+		}
+		a:hover{
+			color:orange;
+		}
+	</style>
 </head>
 <body>
 <br>
@@ -35,24 +43,41 @@
 			</a>
 		  </div>
 		</div>
-		<br>
-		<div class="ui list" th:if="${session.user eq null}">
-			您还未登录，请<a class="menu-item active" th:href="@{/to_login}">登录</a>后查看信息...<br><br>
+	</div>
+	<div class="four column centered row">
+		<div class="column">
+			<br>
+			<div class="ui list" th:if="${session.user eq null}">
+				您还未登录，请<a class="menu-item active" th:href="@{/to_login}">登录</a>后查看信息...<br><br>
+			</div>
+			<div class="ui list" th:if="${session.type eq 0}">
+				<a class="menu-item active" th:href="@{/to_student_kebiao(id=${session.user?.id})}">查看课表</a><br><br>
+				<span th:text="${msg}" style="color: red"></span>
+			</div>
+			<div class="ui list" th:if="${session.type eq 1}">
+				<a class="menu-item active" th:href="@{/to_teacher_kebiao(id=${session.user?.id})}">查看课表</a><br><br>
+				<a class="menu-item active" th:href="@{/subject_index}">课程申请</a><br><br>
+			</div>
+			<div class="ui list" th:if="${session.type eq 2}">
+				<a class="menu-item active" th:href="@{/major_index}">班级管理</a><br><br>
+				<a class="menu-item" th:href="@{/subject_index}">课程管理</a><br><br>
+				<a class="menu-item" th:href="@{/teacher_index}">教师管理</a><br><br>
+				<a class="menu-item" th:href="@{/classroom_index}">教室管理</a><br><br>
+				<a class="menu-item" th:href="@{/student_index}">学生管理</a><br><br>
+				<a class="radio-menu-item" th:if="${session.user?.name eq 'AD0001'}" th:href="@{/admin_index}">管理员管理</a>
+			</div>
 		</div>
-		<div class="ui list" th:if="${session.type eq 0}">
-			<a class="menu-item active" th:href="@{/to_student_kebiao(id=${session.user?.id})}">查看课表</a><br><br>
-		</div>
-		<div class="ui list" th:if="${session.type eq 1}">
-			<a class="menu-item active" th:href="@{/to_teacher_kebiao(id=${session.user?.id})}">查看课表</a><br><br>
-			<a class="menu-item active" th:href="@{/subject_index}">课程申请</a><br><br>
-		</div>
-		<div class="ui list" th:if="${session.type eq 2}">
-			<a class="menu-item active" th:href="@{/major_index}">班级管理</a><br><br>
-			<a class="menu-item" th:href="@{/subject_index}">课程管理</a><br><br>
-		 	<a class="menu-item" th:href="@{/teacher_index}">教师管理</a><br><br>
-			<a class="menu-item" th:href="@{/classroom_index}">教室管理</a><br><br>
-			<a class="menu-item" th:href="@{/student_index}">学生管理</a><br><br>
-			<a class="radio-menu-item" th:if="${session.user?.name eq 'AD0001'}" th:href="@{/admin_index}">管理员管理</a>
+		<div class="column">
+			<br>
+			<br>
+			<div class="ui instant move reveal">
+				<div class="visible content">
+					<img src="https://images.unsplash.com/photo-1593642531955-b62e17bdaa9c?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" class="ui lager image">
+				</div>
+				<div class="hidden content">
+					<img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80" class="ui image">
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

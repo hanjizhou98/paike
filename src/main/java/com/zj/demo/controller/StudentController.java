@@ -136,8 +136,12 @@ public class StudentController {
     }
 
     @RequestMapping("/to_student_kebiao")
-    public String to_student_kebiao(String id,Model model){
+    public String to_student_kebiao(String id,Model model,RedirectAttributes attributes){
         String majorid = studentMajorMapper.findMajorIdByStudentId(id);
+        if (majorid==null){
+            attributes.addFlashAttribute("msg","学生还未分配班级，暂无课表");
+            return "redirect:index";
+        }
         /**
          * 当前班级所有课程都排好后，根据班级id获取
          * 班级的全部课表信息，传递到前段展示即可
@@ -166,8 +170,9 @@ public class StudentController {
     }
 
     @RequestMapping("/student_password_update")
-    public String student_password_update(String id,String password){
+    public String student_password_update(String id,String password,RedirectAttributes attributes){
         studentMapper.updatePasswordByStudentId(id,password);
+        attributes.addFlashAttribute("msg","密码修改成功");
         return "redirect:index";
     }
 

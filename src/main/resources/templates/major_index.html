@@ -5,6 +5,11 @@
 	<title>major_index</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	<style>
+		body{
+			background-color: aliceblue;
+		}
+	</style>
 </head>
 <body>
 <br>
@@ -46,6 +51,9 @@
 					</button>
 					<button class="ui small button" th:unless="${major.state eq '0'}">
 						<a style="color: green;" th:href="@{/to_paike_info(id=${major.id})}">查看排课</a>
+					</button>
+					<button class="ui small button" th:unless="${major.state eq '0'}">
+						<a style="color: green;" th:href="@{/to_paike_reset(id=${major.id})}">重新排课</a>
 					</button>
 				</td>
 			</tr>

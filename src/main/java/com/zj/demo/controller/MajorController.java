@@ -260,11 +260,11 @@ public class MajorController {
     /**
      *
      * @param id
-     * @param model
+     * @param attributes
      * @return
      */
     @RequestMapping("/to_paike")
-    public String to_paike(String id,RedirectAttributes attributes) {
+    public String to_paike(@ModelAttribute("id") String id,RedirectAttributes attributes) {
         /**
          * 根据专业id找专业对应的课程
          */
@@ -494,5 +494,18 @@ public class MajorController {
         addList(id, model, paikes);
         model.addAttribute("numOfSub",paikes.size()-temp);
         return "paike_index";
+    }
+
+    @RequestMapping("to_paike_reset")
+    public String to_paike_reset(String id,RedirectAttributes attributes){
+        List<Paike> paikes = paikeMapper.findPaikesByMajorId(id);
+        for (Paike paike :
+                paikes) {
+            classroomTimeMapper.updateClassroomStateByIdAndTimeNum(paike.getClassroomId(), paike.getTimeNum(), "0");
+            teacherTimeMapper.updateTeacherStateByIdAndTimeNum(paike.getTeacherId(), paike.getTimeNum(), "0");
+        }
+        paikeMapper.deletePaikesByMajorId(id);
+        attributes.addFlashAttribute("id",id);
+        return "redirect:to_paike";
     }
 }
