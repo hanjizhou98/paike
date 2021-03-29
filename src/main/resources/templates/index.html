@@ -19,18 +19,18 @@
 <br><br>
 <div class="ui two column centered grid">
 	<div class="column">
-		<div class="ui secondary  menu">
-		  <a class="ui item active" th:href="@{/index}">
+		<div class="ui secondary menu">
+		  <a class="ui item active red" th:href="@{/index}">
 		    主页
 		  </a>
 		  <div class="right menu">
-		    <a class="ui item active" th:href="@{/to_login}" th:if="${session.user eq null}">
+		    <a class="ui item active red" th:href="@{/to_login}" th:if="${session.user eq null}">
 		      登录
 		    </a>
 			<!--<a class="ui item active" th:href="@{/to_register}" th:if="${session.user eq null}">
 			  注册
 			</a>-->
-			<a class="ui item active" th:href="@{/profile(id=${session.user.id},type=${session.type})}" th:if="${session.user ne null}">
+			<a class="ui item active blue" th:href="@{/profile(id=${session.user.id},type=${session.type})}" th:if="${session.user ne null}">
 				<span th:if="${session.type eq 0}" th:text="'学生 : '+${session.user?.name}">
 				</span>
 				<span th:if="${session.type eq 1}" th:text="'教师 : '+${session.user?.name}">
@@ -38,7 +38,7 @@
 				<span th:if="${session.type eq 2}" th:text="'管理员 : '+${session.user?.name}">
 				</span>
 			</a>
-			<a class="ui item active" th:href="@{/logout}" th:if="${session.user ne null}">
+			<a class="ui item active red" th:href="@{/logout}" th:if="${session.user ne null}">
 			  退出
 			</a>
 		  </div>
