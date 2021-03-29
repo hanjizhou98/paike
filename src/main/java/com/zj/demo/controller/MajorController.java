@@ -216,13 +216,7 @@ public class MajorController {
         majorSubjectMapper.deleteMajorAndSubjectByMajorId(id);
         studentMajorMapper.deleteMajorAndStudentByMajorId(id);
         majorMapper.deleteMajorById(id);
-        List<Paike> paikes = paikeMapper.findPaikesByMajorId(id);
-        for (Paike paike :
-                paikes) {
-            classroomTimeMapper.updateClassroomStateByIdAndTimeNum(paike.getClassroomId(), paike.getTimeNum(), "0");
-            teacherTimeMapper.updateTeacherStateByIdAndTimeNum(paike.getTeacherId(), paike.getTimeNum(), "0");
-        }
-        paikeMapper.deletePaikesByMajorId(id);
+        findPaikes(id);
     }
 
     /**
@@ -498,6 +492,16 @@ public class MajorController {
 
     @RequestMapping("to_paike_reset")
     public String to_paike_reset(String id,RedirectAttributes attributes){
+        findPaikes(id);
+        attributes.addFlashAttribute("id",id);
+        return "redirect:to_paike";
+    }
+
+    /**
+     * 找到对应的排课信息进行级联操作
+     * @param id
+     */
+    private void findPaikes(String id) {
         List<Paike> paikes = paikeMapper.findPaikesByMajorId(id);
         for (Paike paike :
                 paikes) {
@@ -505,7 +509,5 @@ public class MajorController {
             teacherTimeMapper.updateTeacherStateByIdAndTimeNum(paike.getTeacherId(), paike.getTimeNum(), "0");
         }
         paikeMapper.deletePaikesByMajorId(id);
-        attributes.addFlashAttribute("id",id);
-        return "redirect:to_paike";
     }
 }
